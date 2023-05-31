@@ -22,6 +22,8 @@ function Post({ author, content, publishedAt }) {
     addSuffix: true,
   });
 
+  const isNewCommentTextEmpty = newCommentText.length === 0;
+
   function handleCreateNewComment() {
     event.preventDefault();
     setComments([...comments, newCommentText]);
@@ -29,7 +31,12 @@ function Post({ author, content, publishedAt }) {
   }
 
   function handleNewCommentTextChange() {
+    event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentTextInvalid() {
+    event.target.setCustomValidity("Este campo é obrigatório.");
   }
 
   function deleteComment(commentToDelete) {
@@ -79,10 +86,14 @@ function Post({ author, content, publishedAt }) {
           placeholder="Escreva um comentário..."
           value={newCommentText}
           onChange={handleNewCommentTextChange}
+          onInvalid={handleNewCommentTextInvalid}
+          required
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentTextEmpty}>
+            Publicar
+          </button>
         </footer>
       </form>
 
