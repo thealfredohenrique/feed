@@ -26,7 +26,7 @@ function Post({ author, content, publishedAt }) {
 
   function handleCreateNewComment() {
     event.preventDefault();
-    setComments([...comments, newCommentText]);
+    setComments((value) => [...value, newCommentText]);
     setNewCommentText("");
   }
 

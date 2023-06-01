@@ -11,7 +11,7 @@ function Comment({ content, onDeleteComment }) {
   }
 
   function handleLikeComment() {
-    setLikeCount(likeCount + 1)
+    setLikeCount((value) => value + 1)
   }
 
   return (
